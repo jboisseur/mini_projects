@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+body {
+    height: 100vh;
+}
+
+input {
+    min-width: 40%;
+    margin: 1em 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+      background: #333;
+      color: white;
+    }
+
+    input {
+        background: #333;
+        color: white;
+    }
+}
+
+body, form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;    
+}
+
+input:focus {
+    outline: none;
+}
+
+input:invalid {
+    border: none;
+    outline: 1px solid red;
+}
