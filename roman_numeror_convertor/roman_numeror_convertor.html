@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>  
-  <meta charset="UTF-8" />
-  <meta name="description" content="Roman Numeror Convertor" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roman Numeror Convertor</title>
-  <link rel="stylesheet" href="roman_numeror_convertor.css"/>
-  <script type="text/javascript" src="roman_numeror_convertor.min.js" defer></script>
- </head>
- <body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Roman Numeror Convertor" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roman Numeror Convertor</title>
+    <link rel="stylesheet" href="roman_numeror_convertor.css"/>
+    <script type="text/javascript" src="roman_numeror_convertor.min.js"></script>
+  </head>
+  <body>
+    <noscript>Sorry, JavaScript is needed!</noscript>
     <h1>Roman Numeror Convertor</h1>
     <form>
-       <label for="convertor">Convert Arabic to Roman</label>
-       <input type="number" min="1" max="9999" id="convertor" oninput="convertToRoman()" value="1" autofocus/>
+      <label for="convertor">Convert Arabic to Roman</label>
+      <input class="height" type="number" min="1" max="9999" id="convertor" oninput="convertToRoman()" value="1" autofocus/>
     </form>
-    <h2 id="romanNumber">I</h2>
+    <h2 id="romanNumber" class="height">I</h2>
  </body>
 </html>
