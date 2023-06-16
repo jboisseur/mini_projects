@@ -1,9 +1,11 @@
-let quotes = [
+{ 
+    quotes: [
+        
     {
         quote: "appendTo() allows you to select HTML elements and append them to another element",
         author: "jQuery"
     },
-
+        
     {
         quote: "css() allows you to change the CSS of an element",
         author: "jQuery"
@@ -98,4 +100,5 @@ let quotes = [
         quote: "To protect data from mutation, use Object.freeze() function. The argument would be the object you'd like to freeze",
         author: "JavaScript"
     }
-];
+    ]
+}
