@@ -1,6 +1,6 @@
 const Screen = () => {
     return (
-        <h1 id="display">Display</h1>
+        <h1 id="display">0</h1>
     );
 };
 

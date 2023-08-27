@@ -40,6 +40,10 @@ const buttonBank = [
         "show": "9"
     },
     {
+        "id": "decimal",
+        "show": "."
+    },
+    {
         "id": "add",
         "show": "+"
     },
@@ -49,7 +53,7 @@ const buttonBank = [
     },
     {
         "id": "multiply",
-        "show": "x"
+        "show": "*"
     },
     {
         "id": "divide",
@@ -58,10 +62,6 @@ const buttonBank = [
     {
         "id": "equals",
         "show": "="
-    },
-    {
-        "id": "decimal",
-        "show": "."
     },
     {
         "id": "clear",
