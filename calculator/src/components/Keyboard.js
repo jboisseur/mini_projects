@@ -58,13 +58,27 @@ const buttonBank = [
     {
         "id": "equals",
         "show": "="
+    },
+    {
+        "id": "decimal",
+        "show": "."
+    },
+    {
+        "id": "clear",
+        "show": "Clear"
     }
 ]
 
-const Keyboard = () => {
+const Keyboard = ({onClick}) => {
     return (
-        buttonBank.map((item) => <button id={item.id}>{item.show}</button>)
-    );
+        buttonBank.map((item) => 
+            <button 
+              id={item.id} 
+              onClick={onClick}
+            >            
+              {item.show}
+            </button>)
+        );
 };
 
 export default Keyboard
