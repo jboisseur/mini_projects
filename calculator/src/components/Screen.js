@@ -1,6 +1,11 @@
-const Screen = () => {
+import "./Screen.css";
+
+const Screen = ({value}) => {
     return (
-        <h1 id="display">0</h1>
+        <div className="screenWrapper">
+          <div id="display">{value}</div>
+          <div id="history"></div>
+        </div>
     );
 };
 
