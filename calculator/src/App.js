@@ -4,11 +4,7 @@ import ButtonWrapper from "./components/ButtonWrapper";
 import Keyboard from "./components/Keyboard";
 
 
-/* WARNING This app uses eval() function. Do NOT use in production */
-
-/* 1 more test to pass:
-- only 1 decimal point per number allowed - 5.5.5 should be considered as 5.55
-*/
+// WARNING This app uses eval() function. Do NOT use in production
 
 const App = () => {
   
@@ -20,6 +16,7 @@ const App = () => {
     let displayZone = document.getElementById("display");
     let string = "";
     let precedingChar = displayZone.innerHTML.charAt(displayZone.innerHTML.length - 1);
+    let beforePrecedingChar = displayZone.innerHTML.charAt(displayZone.innerHTML.length - 2);
 
     if (value !== "Clear" && value !== "=") {   
       
@@ -27,8 +24,14 @@ const App = () => {
         displayZone.innerHTML = value; // replace default value with first hit value
       }
 
-      else if (value === "." && precedingChar === ".") { // If another decimal is hit, ignore
+      else if (value === ".") {
+        if (precedingChar === "." || beforePrecedingChar === ".") { // If another decimal is hit, ignore
       }
+        else {
+          displayZone.innerHTML += value;
+        }
+      }
+
 
       // if value is an operator
       else if (operator.indexOf(value) !== -1) {
@@ -40,7 +43,7 @@ const App = () => {
           }
 
           // check if the character before preceding is also an operator
-          if (operator.indexOf(displayZone.innerHTML.charAt(displayZone.innerHTML.length - 2)) !== -1) { 
+          if (operator.indexOf(beforePrecedingChar) !== -1) { 
             // if yes and if preceding is not * remove it
             if (precedingChar !== "*") {
               displayZone.innerHTML = displayZone.innerHTML.slice(0, -2)
@@ -72,13 +75,6 @@ const App = () => {
       calculate(string);
     }
     }
-
-  function cleanUp(string) {
-    /* 
-    * - + : garder le dernier
-    * - : garder les 2
-    */
-  }
   
   function calculate(string) {
     let displayZone = document.getElementById("display");

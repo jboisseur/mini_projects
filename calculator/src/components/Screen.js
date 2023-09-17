@@ -1,10 +1,9 @@
 import "./Screen.css";
 
-const Screen = ({value}) => {
+const Screen = () => {
     return (
         <div className="screenWrapper">
-          <div id="display">{value}</div>
-          <div id="history"></div>
+          <div id="display"></div>
         </div>
     );
 };

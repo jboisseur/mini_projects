@@ -7,22 +7,12 @@
   background-color: #485461;
   border-radius: 10px;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   box-sizing: border-box;
 }
 
 #display { 
   width: inherit;
-  height: 34%;
   color: white;
   font-size: xx-large;
-}
-
-#history {
-  width: inherit;
-  height: 34%;
-  font-size: small;
-  color: orange;
-  overflow: hidden;
 }
