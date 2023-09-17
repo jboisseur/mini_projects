@@ -95,6 +95,7 @@ const Keyboard = ({onClick}) => {
               id={item.id} 
               onClick={onClick}
               className={item.class}
+              key={item.id}
             >            
               {item.show}
             </button>)

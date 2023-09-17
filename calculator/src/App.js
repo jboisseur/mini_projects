@@ -6,26 +6,13 @@ import Keyboard from "./components/Keyboard";
 
 /* WARNING This app uses eval() function. Do NOT use in production */
 
-/* 2 more tests to pass:
+/* 1 more test to pass:
 - only 1 decimal point per number allowed - 5.5.5 should be considered as 5.55
-> to resolve we could try to add decimal point only if number of decimal points for the current number is set to 0. So we need:
-. to count the number of decimal points
-. to reset to 0 each time an operator is clicked
-
-- If 2 or more operators are entered consecutively, the operation performed should be the last operator entered excluding the negative (-) sign. 
-For instance 
-_ the sequence "5 * - + 5" = should produce an output of "10"
-_ the sequence "5 * - 5" = should produce an output of "-25"
-> to resolve we could use the following logic: if an operator is preceding, replace it by the one just hit.
-
-Left to do  :
-. The test suite provide numbers in red, answers take too long. Optimize?
 */
 
 const App = () => {
-
-  let decimalPoint = 0;
-  let operator = ["+", "*", "/"];
+  
+  let operator = ["+", "-", "*", "/"];
 
   const displayToScreen = (event) => {
     event.preventDefault();
@@ -40,17 +27,33 @@ const App = () => {
         displayZone.innerHTML = value; // replace default value with first hit value
       }
 
-      else if (value === "." && precedingChar === ".") {
-        // change here for decimal point case
+      else if (value === "." && precedingChar === ".") { // If another decimal is hit, ignore
       }
 
       // if value is an operator
       else if (operator.indexOf(value) !== -1) {
-       if (operator.indexOf(precedingChar) !== -1 || precedingChar === "-" || operator.indexOf(displayZone.innerHTML.length -2) !== -1) { // found a preceding operator or -
-        displayZone.innerHTML = displayZone.innerHTML.slice(0, -1) // remove preceding operator
-        displayZone.innerHTML += value; // replace by newly hit
-       }
-       else {
+        if (operator.indexOf(precedingChar) !== -1) { // found a preceding operator
+          if (precedingChar === "*" || precedingChar === "/") {
+            if (value === "-") {
+              displayZone.innerHTML += value;
+            } // keep it, "-" is the sign          
+          }
+
+          // check if the character before preceding is also an operator
+          if (operator.indexOf(displayZone.innerHTML.charAt(displayZone.innerHTML.length - 2)) !== -1) { 
+            // if yes and if preceding is not * remove it
+            if (precedingChar !== "*") {
+              displayZone.innerHTML = displayZone.innerHTML.slice(0, -2)
+              displayZone.innerHTML += value;
+            }
+          }
+
+          else {
+            displayZone.innerHTML = displayZone.innerHTML.slice(0, -1) // remove preceding operator
+            displayZone.innerHTML += value; // replace by newly hit
+          }
+        }
+        else {
         displayZone.innerHTML += value;
        }
       }
@@ -69,6 +72,13 @@ const App = () => {
       calculate(string);
     }
     }
+
+  function cleanUp(string) {
+    /* 
+    * - + : garder le dernier
+    * - : garder les 2
+    */
+  }
   
   function calculate(string) {
     let displayZone = document.getElementById("display");
