@@ -1,10 +1,12 @@
 import Wrapper from "./components/Wrapper";
 import Screen from "./components/Screen";
+import ButtonWrapper from "./components/ButtonWrapper";
 import Keyboard from "./components/Keyboard";
 
 
-/* 
-2 more tests to pass:
+/* WARNING This app uses eval() function. Do NOT use in production */
+
+/* 2 more tests to pass:
 - only 1 decimal point per number allowed - 5.5.5 should be considered as 5.55
 > to resolve we could try to add decimal point only if number of decimal points for the current number is set to 0. So we need:
 . to count the number of decimal points
@@ -17,13 +19,12 @@ _ the sequence "5 * - 5" = should produce an output of "-25"
 > to resolve we could use the following logic: if an operator is preceding, replace it by the one just hit.
 
 Left to do  :
-. There seems to be security risks with eval function so it should also be replaced.
 . The test suite provide numbers in red, answers take too long. Optimize?
-. Work on the CSS
 */
 
 const App = () => {
 
+  let decimalPoint = 0;
   let operator = ["+", "*", "/"];
 
   const displayToScreen = (event) => {
@@ -46,7 +47,6 @@ const App = () => {
       // if value is an operator
       else if (operator.indexOf(value) !== -1) {
        if (operator.indexOf(precedingChar) !== -1 || precedingChar === "-" || operator.indexOf(displayZone.innerHTML.length -2) !== -1) { // found a preceding operator or -
-        console.log(displayZone.innerHTML.length -2)
         displayZone.innerHTML = displayZone.innerHTML.slice(0, -1) // remove preceding operator
         displayZone.innerHTML += value; // replace by newly hit
        }
@@ -79,7 +79,9 @@ const App = () => {
   return (
     <Wrapper>
       <Screen />
-      <Keyboard onClick={displayToScreen} />
+      <ButtonWrapper>
+        <Keyboard onClick={displayToScreen} className="buttonWrapper" />
+      </ButtonWrapper>
     </Wrapper>
   );
 };
