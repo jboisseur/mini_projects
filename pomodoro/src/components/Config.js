@@ -1,20 +1,48 @@
 import Session from "./Session";
 import { useState } from "react";
 
+const initialState = {
+    "break": 5,
+    "session": 25
+}
+
 const Config = () => {
-    const [breakDuration, setBreakDuration] = useState(5);
-    const [sessionDuration, setSessionDuration] = useState (25)
+    const [duration, setDuration] = useState({
+        "break": initialState["break"],
+        "session": initialState["session"]
+    })
+
+    function updateDuration(breakOrSession, sign) {
+        if (sign === "-") {
+            duration[breakOrSession] >= 2 ? // min break is 1 min
+            setDuration({...duration, [breakOrSession]: duration[breakOrSession] - 1}) :
+            setDuration({...duration})
+        }
+
+        else { // when sign is +
+            duration[breakOrSession] < 60 ? // max session is 60 min
+            setDuration({...duration, [breakOrSession]: duration[breakOrSession] + 1}) :
+            setDuration({...duration})
+        }
+    }
 
     return (
         <>
         <h2>Configuration</h2>
         <h3 id="break-label">Break duration (minutes)</h3>
-        <p><span id="break-decrement">-</span> <span id="break-length">{breakDuration}</span> <span id="break-increment">+</span></p>
+        <p>
+            <button id="break-decrement" 
+            onClick={() => updateDuration("break", "-")}>-</button> <span id="break-length">{duration.break}</span> <button id="break-increment" onClick={() => updateDuration("break", "+")}>+</button>
+        </p>
 
         <h3 id="session-label">Session duration (minutes)</h3>
-        <p><span id="session-decrement">-</span> <span id="session-length">{sessionDuration}</span> <span id="session-increment">+</span></p>
+        <p>
+            <button id="session-decrement" onClick={() => updateDuration("session", "-")}>-</button> <span id="session-length">{duration.session}</span> <button id="session-increment" onClick={() => updateDuration("session", "+")}>+</button>
+        </p>
 
-        <Session breakDuration={breakDuration} sessionDuration={sessionDuration}/>
+        <Session duration={duration}/>
+
+        <button id="reset" onClick={() => setDuration(initialState)}>Reset</button>
         </>
     )
   };
