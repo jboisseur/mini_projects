@@ -3,28 +3,28 @@ import { useState } from "react";
 
 const initialState = {
     "break": 5,
-    "session": 25
+    "session": 25,
+    "timeleft": 1500
 }
 
 const Config = () => {
     const [duration, setDuration] = useState({
         "break": initialState["break"],
-        "session": initialState["session"]
+        "session": initialState["session"],
+        "timeleft": initialState["timeleft"]
     })
 
     function updateDuration(breakOrSession, sign) {
         if (sign === "-") {
-            duration[breakOrSession] >= 2 ? // min break is 1 min
-            setDuration({...duration, [breakOrSession]: duration[breakOrSession] - 1}) :
-            setDuration({...duration})
+            duration[breakOrSession] > 1 ? // min break is 1 min
+            setDuration({...duration, [breakOrSession]: duration[breakOrSession] - 1}) : setDuration({...duration})
         }
 
         else { // when sign is +
             duration[breakOrSession] < 60 ? // max session is 60 min
-            setDuration({...duration, [breakOrSession]: duration[breakOrSession] + 1}) :
-            setDuration({...duration})
+            setDuration({...duration, [breakOrSession]: duration[breakOrSession] + 1}) : setDuration({...duration})
         }
-    }
+    }    
 
     return (
         <>
@@ -40,7 +40,7 @@ const Config = () => {
             <button id="session-decrement" onClick={() => updateDuration("session", "-")}>-</button> <span id="session-length">{duration.session}</span> <button id="session-increment" onClick={() => updateDuration("session", "+")}>+</button>
         </p>
 
-        <Session duration={duration}/>
+        <Session config={duration}/>
 
         <button id="reset" onClick={() => setDuration(initialState)}>Reset</button>
         </>
