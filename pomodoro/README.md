@@ -1,9 +1,7 @@
 # 25 + 5 Clock
-
 FreeCodeCamp projet for Front End Development Libraries certifification, built with React.
 
 ## User stories
-
 - Expected elements
   - id="break-label" (string)
   - id="session-label" (string)
@@ -41,3 +39,6 @@ FreeCodeCamp projet for Front End Development Libraries certifification, built w
   - reset
     - stop beep if playing
     - restore default values
+
+## Credits
+The sound comes from https://lasonotheque.org/detail-2812-reveil-mecanique-sonnerie-9.html(https://lasonotheque.org/detail-2812-reveil-mecanique-sonnerie-9.html) (Joseph SARDIN)
