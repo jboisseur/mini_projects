@@ -4,14 +4,13 @@ import { useState } from "react";
 const initialState = {
     "break": 5,
     "session": 25,
-    "timeleft": 1500
+    "reset": true
 }
 
 const Config = () => {
     const [duration, setDuration] = useState({
         "break": initialState["break"],
-        "session": initialState["session"],
-        "timeleft": initialState["timeleft"]
+        "session": initialState["session"]
     })
 
     function updateDuration(breakOrSession, sign) {

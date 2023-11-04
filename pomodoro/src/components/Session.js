@@ -7,33 +7,37 @@ const Session = ({config}) => {
         "break": "Break time!"
     };
     const [isRunning, setRunning] = useState (false)
-    const [timeLeft, setTimeLeft] = useState (config["timeleft"])
+    const [timeLeft, setTimeLeft] = useState (1500)
     const [isSession, setIsSession] = useState (messages["session"])
 
-    // Update timeLeft when config changes
+    // Update when config changes
     useEffect(() => {
         setTimeLeft(config["session"] * 60); // Changes minutes to seconds
+        setRunning(false)
     }, [config]);
 
-    // When Run or Stop button is hit
-    const toggleIsRunning = () => {
-        setRunning(!isRunning);
-        clearTimeout(runTimer);
-        setTimeLeft(timeLeft - 1); // Manage first render
+    // Countdown
+    useEffect(() => {
+        const runTimer = setTimeout(() => {
+            isRunning ? setTimeLeft(timeLeft - 1) : clearTimeout(runTimer)
+        }, 1000);
+
+        return () => {
+            clearTimeout(runTimer)
+        }
+    }, [timeLeft, isRunning])
+
+    if (timeLeft === 0) { 
+        beep.play();
+        toggleType(Object.keys(messages).find(key => messages[key] === isSession));
+    } // The argument is the key corresponding to isSession message       
+    
+    // When Run or Stop button is hit, setRunning to opposite value
+    const toggleIsRunning = () => { 
+        setRunning(!isRunning);              
     }
 
-    // Countdown
-    const runTimer = setTimeout(() => {
-        if (timeLeft && isRunning) {
-            setTimeLeft(timeLeft - 1)
-        }
-        // When 00:00 is reached 
-        else if (timeLeft === 0) { 
-            beep.play();
-            toggleType(Object.keys(messages).find(key => messages[key] === isSession)); // The argument is the key corresponding to isSession message                    
-        }
-    }, 1000)    
-
+    // Toggle to Break after Session and to Session after Break
     function toggleType(message) {
         if (message === "session") {
             setTimeLeft(config["break"] * 60);
