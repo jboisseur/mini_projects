@@ -9,11 +9,16 @@ const Session = ({config}) => {
     const [isRunning, setRunning] = useState (false)
     const [timeLeft, setTimeLeft] = useState (1500)
     const [isSession, setIsSession] = useState (messages["session"])
+    
 
-    // Update when config changes
+    // Update when config changes or Reset is hit
     useEffect(() => {
-        setTimeLeft(config["session"] * 60); // Changes minutes to seconds
-        setRunning(false)
+        setRunning(false);
+        setTimeLeft(config["session"] * 60); // Changes minutes to seconds        
+        setIsSession(messages["session"]);
+        /* Audio rewind 
+        beep.pause();
+        beep.currentTime = 0; */
     }, [config]);
 
     // Countdown
@@ -27,10 +32,14 @@ const Session = ({config}) => {
         }
     }, [timeLeft, isRunning])
 
-    if (timeLeft === 0) { 
+    //handle 00:00
+    if (timeLeft === 0) {
         beep.play();
-        toggleType(Object.keys(messages).find(key => messages[key] === isSession));
-    } // The argument is the key corresponding to isSession message       
+    }
+    
+    if (timeLeft === -1) {        
+        toggleType(Object.keys(messages).find(key => messages[key] === isSession)); // The argument is the key corresponding to isSession message
+    }
     
     // When Run or Stop button is hit, setRunning to opposite value
     const toggleIsRunning = () => { 
@@ -46,7 +55,7 @@ const Session = ({config}) => {
         else {
             setTimeLeft(config["session"] * 60);
             setIsSession(messages["session"]);
-        }     
+        }
     }
 
     // Format timeLeft to mm:ss
@@ -54,10 +63,10 @@ const Session = ({config}) => {
         return num < 10 ? '0' + num : num
      }
 
-    const minutes = addZero(Math.floor(timeLeft / 60));
-    const seconds = addZero(timeLeft - minutes * 60);
+    let minutes = addZero(Math.floor(timeLeft / 60));
+    let seconds = addZero(timeLeft - minutes * 60);
 
-    const formattedTiming = minutes + ':' + seconds
+    let formattedTiming = minutes + ':' + seconds
 
     return (
         <>
