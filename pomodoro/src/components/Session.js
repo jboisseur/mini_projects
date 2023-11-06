@@ -1,24 +1,21 @@
 import { useState, useEffect } from "react";
+import sound from './beep.mp3'
 
-const Session = ({config}) => {
-    let beep = document.getElementById("beep");
+const Session = ({config, beep}) => {
     const messages = {
         "session": "Session",
         "break": "Break time!"
     };
+
     const [isRunning, setRunning] = useState (false)
     const [timeLeft, setTimeLeft] = useState (1500)
     const [isSession, setIsSession] = useState (messages["session"])
     
-
     // Update when config changes or Reset is hit
     useEffect(() => {
         setRunning(false);
         setTimeLeft(config["session"] * 60); // Changes minutes to seconds        
         setIsSession(messages["session"]);
-        /* Audio rewind 
-        beep.pause();
-        beep.currentTime = 0; */
     }, [config]);
 
     // Countdown
@@ -32,13 +29,13 @@ const Session = ({config}) => {
         }
     }, [timeLeft, isRunning])
 
-    //handle 00:00
-    if (timeLeft === 0) {
-        beep.play();
+    // Handle 00:00
+    if (timeLeft === 0 && isRunning) {
+        beep.current.play();
     }
     
-    if (timeLeft === -1) {        
-        toggleType(Object.keys(messages).find(key => messages[key] === isSession)); // The argument is the key corresponding to isSession message
+    if (timeLeft < 0) {  // 00:00 must be displayed 1 second
+       toggleType(Object.keys(messages).find(key => messages[key] === isSession)); // The argument is the key corresponding to isSession message     
     }
     
     // When Run or Stop button is hit, setRunning to opposite value
@@ -73,7 +70,7 @@ const Session = ({config}) => {
         <h2><span id="timer-label">{isSession}</span></h2>
         <p id="time-left">{formattedTiming}</p>
         <button id="start_stop" onClick={toggleIsRunning}>{isRunning ? "Stop" : "Run"}</button>
-        <audio id="beep" src="https://lasonotheque.org/UPLOAD/mp3/2812.mp3"/>
+        <audio id="beep" src={sound} ref={beep} load="auto"/>
         </>
     )
   };

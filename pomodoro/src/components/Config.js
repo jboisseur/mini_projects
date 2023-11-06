@@ -1,5 +1,5 @@
 import Session from "./Session";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const initialState = {
     "break": 5,
@@ -13,6 +13,8 @@ const Config = () => {
         "session": initialState["session"]
     })
 
+    const beep = useRef(document.getElementById("beep"))
+
     function updateDuration(breakOrSession, sign) {
         if (sign === "-") {
             duration[breakOrSession] > 1 ? // min break is 1 min
@@ -23,7 +25,13 @@ const Config = () => {
             duration[breakOrSession] < 60 ? // max session is 60 min
             setDuration({...duration, [breakOrSession]: duration[breakOrSession] + 1}) : setDuration({...duration})
         }
-    }    
+    }
+    
+    function handleReset() {
+        setDuration(initialState);
+        beep.current.pause();
+        beep.current.currentTime = 0;
+    }
 
     return (
         <>
@@ -39,9 +47,9 @@ const Config = () => {
             <button id="session-decrement" onClick={() => updateDuration("session", "-")}>-</button> <span id="session-length">{duration.session}</span> <button id="session-increment" onClick={() => updateDuration("session", "+")}>+</button>
         </p>
 
-        <Session config={duration}/>
+        <Session config={duration} beep={beep}/>
 
-        <button id="reset" onClick={() => setDuration(initialState)}>Reset</button>
+        <button id="reset" onClick={handleReset}>Reset</button>
         </>
     )
   };
