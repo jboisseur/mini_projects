@@ -8,7 +8,7 @@
 .App {
   margin: 1em auto;
   display: flex;
-  align-items: center;
+  align-items: space-around;
   justify-content: center;
   width: 80vw;  
 }
@@ -30,9 +30,11 @@ button:hover {
   
 // Specific to Configuration
 .config-component {
-  margin: 1em auto;
+  margin: 1em;
   min-width: 50vw;
   width: $default-width;
+  border: 2px solid $secondary-color;
+  border-radius: 5px;
 }  
 
 .config-component button {
@@ -49,7 +51,7 @@ button:hover {
 
 // Specific to Session
 .session-component {
-  margin: 1em auto;
+  margin: 1em;
   padding: 1em;
   width: $default-width;
   background-color: $secondary-color;
