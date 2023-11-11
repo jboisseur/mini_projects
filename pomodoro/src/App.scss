@@ -1,0 +1,81 @@
+@import "_shared"; 
+
+.Introduction {
+  margin: 1em auto;
+  width: $default-width;  
+}
+  
+.App {
+  margin: 1em auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80vw;  
+}
+
+// Button styling
+button {
+  background-color: $secondary-color;
+  color: $main-color;
+  border: none;
+  border-radius: 5px;
+  margin: 0.5em;
+}
+  
+button:hover {
+  background-color: $main-color;
+  color: $secondary-color;
+  border: 1px solid $secondary-color;
+}
+  
+// Specific to Configuration
+.config-component {
+  margin: 1em auto;
+  min-width: 50vw;
+  width: $default-width;
+}  
+
+.config-component button {
+  width: 1.5em;
+  height: 1.5em;
+  font-size: xx-large;
+}
+  
+#break-length, #session-length {
+  font-size: xx-large;
+  display: inline-block; // fixed width for numbers
+  width: 1em;  
+}
+
+// Specific to Session
+.session-component {
+  margin: 1em auto;
+  padding: 1em;
+  width: $default-width;
+  background-color: $secondary-color;
+  color: $main-color;
+  border-radius: 5px;
+}
+
+.session-component button {
+  border: 2px solid $main-color;
+  padding: 1em;
+  text-transform: uppercase;
+}
+    
+#start_stop {
+  background-color: $main-color;
+  color: $secondary-color;
+  font-weight: bold;
+  display: inline-block;
+  width: 5em; 
+}
+    
+#start_stop:hover {
+  border: 2px solid $main-color;  
+  text-decoration: underline;
+}
+
+#time-left {
+  font-size: xxx-large;
+}

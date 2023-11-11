@@ -67,10 +67,10 @@ const Session = ({config, beep}) => {
 
     return (
         <>
-        <h2><span id="timer-label">{isSession}</span></h2>
-        <p id="time-left">{formattedTiming}</p>
-        <button id="start_stop" onClick={toggleIsRunning}>{isRunning ? "Stop" : "Run"}</button>
-        <audio id="beep" src={sound} ref={beep} load="auto"/>
+         <h2><span id="timer-label">{isSession}</span></h2>
+         <p id="time-left">{formattedTiming}</p>
+         <button id="start_stop" onClick={toggleIsRunning}>{isRunning ? "Stop" : "Run"}</button>
+         <audio id="beep" src={sound} ref={beep} load="auto"/>
         </>
     )
   };

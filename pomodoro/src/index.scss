@@ -1,0 +1,16 @@
+@import "_shared"; 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $main-color;
+  margin: $default-margin;
+  font-family: $font;
+  color: $secondary-color;
+  text-align: center;
+  height: 100vh; 
+}

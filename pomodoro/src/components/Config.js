@@ -35,21 +35,26 @@ const Config = () => {
 
     return (
         <>
-        <h2>Configuration</h2>
-        <h3 id="break-label">Break duration (minutes)</h3>
-        <p>
-            <button id="break-decrement" 
-            onClick={() => updateDuration("break", "-")}>-</button> <span id="break-length">{duration.break}</span> <button id="break-increment" onClick={() => updateDuration("break", "+")}>+</button>
-        </p>
+        
+        <div className="config-component">
+            <h2>Configuration</h2>
+            <h3 id="break-label">Break duration (minutes)</h3>
+            <p>
+                <button id="break-decrement" 
+                onClick={() => updateDuration("break", "-")}>-</button> <span id="break-length">{duration.break}</span> <button id="break-increment" onClick={() => updateDuration("break", "+")}>+</button>
+            </p>
 
-        <h3 id="session-label">Session duration (minutes)</h3>
-        <p>
-            <button id="session-decrement" onClick={() => updateDuration("session", "-")}>-</button> <span id="session-length">{duration.session}</span> <button id="session-increment" onClick={() => updateDuration("session", "+")}>+</button>
-        </p>
+            <h3 id="session-label">Session duration (minutes)</h3>
+            <p>
+                <button id="session-decrement" onClick={() => updateDuration("session", "-")}>-</button> <span id="session-length">{duration.session}</span> <button id="session-increment" onClick={() => updateDuration("session", "+")}>+</button>
+            </p>
+        </div>
 
-        <Session config={duration} beep={beep}/>
+        <div className="session-component">
+            <Session config={duration} beep={beep}/>
+            <button id="reset" onClick={handleReset}>Reset</button>
+        </div>
 
-        <button id="reset" onClick={handleReset}>Reset</button>
         </>
     )
   };
