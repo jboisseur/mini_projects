@@ -81,3 +81,30 @@ button:hover {
 #time-left {
   font-size: xxx-large;
 }
+
+// Small screens
+@media screen and (max-width: 500px) {
+  .Introduction {
+    width: 90vw;  
+  }
+
+  .App {
+      flex-wrap: wrap;
+      width: 99vw;
+      min-width: 99vw;
+  }
+
+  .config-component, .session-component {
+    margin: 0.2em;
+    width: 95vw;
+    min-width: 95vw;
+  }
+
+  .config-component button {
+    font-size: x-large;
+  }
+    
+  #break-length, #session-length {
+    font-size: x-large;
+  }
+}
